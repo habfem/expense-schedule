@@ -1,10 +1,47 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import { useGlobalContext } from '../../context/globalContext';
+import { InnerLayout } from '../../styles/Layout';
+import IncomeItem from '../IncomeItem/IncomeItem';
+import ExpenseForm from './ExpenseForm';
 
-const Expenses = () => {
-  return (
-    <ExpenseStyled>Expenses</ExpenseStyled>
-  )
+function Expenses() {
+    const { expenses, getExpenses, deleteExpense, totalExpenses } = useGlobalContext()
+
+    useEffect(() => {
+        getExpenses()
+    }, [getExpenses])
+    return (
+        <ExpenseStyled>
+            <InnerLayout>
+                <h1>Expenses</h1>
+                <h2 className="total-income">Total Expense: <span>₦{totalExpenses()}</span></h2>
+                <div className="income-content">
+                    <div className="form-container">
+                        <ExpenseForm />
+                    </div>
+                    <div className="incomes">
+                        {expenses.map((income) => {
+                            const { _id, title, amount, date, category, description, type } = income;
+                            console.log(income)
+                            return <IncomeItem
+                                key={_id}
+                                id={_id}
+                                title={title}
+                                description={description}
+                                amount={amount}
+                                date={date}
+                                type={type}
+                                category={category}
+                                indicatorColor="red"
+                                deleteItem={deleteExpense}
+                            />
+                        })}
+                    </div>
+                </div>
+            </InnerLayout>
+        </ExpenseStyled>
+    )
 }
 
 const ExpenseStyled = styled.div`
@@ -25,7 +62,7 @@ const ExpenseStyled = styled.div`
         span{
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--color-green);
+            color: red;
         }
     }
     .income-content{

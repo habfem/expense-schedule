@@ -5,6 +5,7 @@ import { menuItems } from "../../utils/menuItems"
 import { signout } from "../../utils/Icons";
 
 const Navigation = ({ active, setActive }) => {
+
   return (
     <NavStyled>
       <div className='user-con'>
@@ -92,6 +93,7 @@ const NavStyled = styled.nav`
     }
     .active{
         color: rgba(34, 34, 96, 1) !important;
+        cursor: pointer;
         i{
             color: rgba(34, 34, 96, 1) !important;
         }

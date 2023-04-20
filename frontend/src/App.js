@@ -7,12 +7,15 @@ import Navigation from "./Components/Navigation/Navigation";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Income from "./Components/Income/Income";
 import Expenses from "./Components/Expenses/Expenses";
+import { useGlobalContext } from "./context/globalContext";
 
 
 function App() {
 
-  const [active, setActive] = React.useState(1)
+  const [active, setActive] = useState(1)
 
+  const global = useGlobalContext()
+  console.log(global);
 
   const displayData = () => {
     switch (active) {
@@ -38,7 +41,7 @@ function App() {
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>
-          {displayData}
+          {displayData()}
         </main>
       </MainLayout>
     </AppStyled>
