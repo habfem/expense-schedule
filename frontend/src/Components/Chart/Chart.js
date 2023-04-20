@@ -2,6 +2,7 @@ import React from "react";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from "chart.js";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
+import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
 import { dateFormat } from "../../utils/dateFormat";
 
@@ -54,6 +55,8 @@ function Chart() {
   return (
     <ChartStyled >
       <Line data={data} />
+      <input type="date" id="startdate" />
+      <input type="date" id="enddate" />
     </ChartStyled>
   )
 }
