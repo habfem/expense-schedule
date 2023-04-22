@@ -17,6 +17,9 @@ app.use(cors()); //for domain you want it to be in
 //routes
 app.use("/api/v1", transctionsRoute)
 
+// Make upload folder static
+const __dirname = path.resolve()
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')))
 
