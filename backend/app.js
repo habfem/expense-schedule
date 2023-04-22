@@ -3,7 +3,6 @@ import cors from "cors"
 import dotenv from "dotenv";
 import connectDB from "./db/db.js";
 import path from "path";
-import morgan from "morgan";
 //import readdirSync from "fs";
 import transctionsRoute from "./routes/transactions.js"
 
@@ -11,10 +10,6 @@ const app = express();
 
 dotenv.config();
 connectDB();
-
-if (process.env.NODE_ENV === 'development') { // for dev mode only
-  app.use(morgan('dev'))
-}
 
 app.use(express.json());
 app.use(cors()); //for domain you want it to be in
