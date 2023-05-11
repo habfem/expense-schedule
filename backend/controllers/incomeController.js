@@ -26,6 +26,26 @@ const addIncome = async (req, res) => {
   //console.log(income);
 };
 
+const updateIncome = async (req, res) => {
+  const { title, amount, category, description, date } = req.body
+
+  const income = await Income.findById(req.params.id)
+
+  if (income) {
+    income.title = title
+    income.amount = amount
+    income.category = category
+    income.description = description
+    income.date = date
+
+    const updatedIncome = await income.save()
+    res.json(updatedIncome)
+  } else {
+    res.status(404)
+    throw new Error("Expense not Found")
+  }
+}
+
 const getIncomes = async (req, res) => {
   try {
     const incomes = await Income.find().sort({ createdAt: -1 })
@@ -48,4 +68,4 @@ const deleteIncome = async (req, res) => {
 };
 
 
-export { addIncome, getIncomes, deleteIncome }
+export { addIncome, updateIncome, getIncomes, deleteIncome }
