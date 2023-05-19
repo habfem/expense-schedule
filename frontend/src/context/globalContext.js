@@ -15,10 +15,9 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate incomes
   const addIncome = async (income) => {
-    const response = await axios.post(`${BASE_URL}add-income`, income)
+    await axios.post(`${BASE_URL}add-income`, income)
       .catch((err) => {
         setError(err.response.data.message)
-        console.log(response.data);
       })
     getIncomes()
   }
@@ -26,13 +25,15 @@ export const GlobalProvider = ({ children }) => {
   const getIncomes = async () => {
     const response = await axios.get(`${BASE_URL}get-incomes`)
     setIncomes(response.data)
-    console.log(response.data)
   }
 
   const deleteIncome = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-income/${id}`)
-    console.log(res.message);
+    await axios.delete(`${BASE_URL}delete-income/${id}`)
     getIncomes()
+  }
+
+  const updateIncome = async () => {
+    console.log("Hi Mom");
   }
 
   const totalIncome = () => {
@@ -47,10 +48,9 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate expense
   const addExpense = async (income) => {
-    const response = await axios.post(`${BASE_URL}add-expense`, income)
+    await axios.post(`${BASE_URL}add-expense`, income)
       .catch((err) => {
-        setError(err.response.data.message)
-        console.log(response.data);
+        setError(err.response.data.message);
       })
     getExpenses()
   }
@@ -58,18 +58,23 @@ export const GlobalProvider = ({ children }) => {
   const getExpenses = async () => {
     const response = await axios.get(`${BASE_URL}get-expenses`)
     setExpenses(response.data)
-    console.log(response.data)
   }
 
   const deleteExpense = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-expense/${id}`)
+    await axios.delete(`${BASE_URL}delete-expense/${id}`)
     getExpenses()
-    console.log(res.message);
   }
 
-  const updateExpense = async (id) => {
-    const res = await axios.put(`${BASE_URL}edit-expense/${id}`)
-    console.log("Hi Mama!");
+  /* const updateExpense = async (id, updatedExpense) => {
+    await axios.put(`${BASE_URL}edit-expense/${id}`, updatedExpense)
+      .catch((err) => {
+        setError(err.response.data.message);
+      })
+    getExpenses()
+  } */
+
+  const updateExpense = async () => {
+    console.log("Hi");
   }
 
   const totalExpenses = () => {
@@ -101,6 +106,7 @@ export const GlobalProvider = ({ children }) => {
       getIncomes,
       incomes,
       deleteIncome,
+      updateIncome,
       expenses,
       totalIncome,
       addExpense,
